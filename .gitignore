@@ -1,0 +1,30 @@
+.settings/
+**/target/
+**/bin/
+bin/**
+*.class
+*.classpath
+*.manifest
+*.metadata
+*.project
+*.idl
+*.ear
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.idea
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+
+# IntelliJ generated files #
+*.iml
+**/.idea/**
+*.factorypath
+
+mintaka-entities/src/main/generated
+
+# eclipse generated files  #
+*.factorypath

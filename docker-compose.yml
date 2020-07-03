@@ -1,0 +1,12 @@
+version: "3.4"
+services:
+  mydb:
+    image: postgres:12.1
+    container_name: postgres_db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+        - POSTGRES_USER=kensin
+        - POSTGRES_PASSWORD=123
+        - POSTGRES_DB=DEV_DB
