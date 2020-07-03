@@ -8,6 +8,10 @@ spring:
       # Hibernate ddl auto (create, create-drop, validate, update)
       ddl-auto: create
     properties:
+      org:
+        hibernate:
+          envers:
+            track_entities_changed_in_revision: true # let envers show the revchanges table
       hibernate:
 #        format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect

@@ -1,10 +1,11 @@
 package nz.co.indepth.infinity.entity;
 
 import nz.co.indepth.infinity.listener.CustomerAuditRevisionListener;
-import org.hibernate.envers.DefaultRevisionEntity;
-import org.hibernate.envers.RevisionEntity;
+import org.hibernate.envers.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * https://adamzareba.github.io/Audit-entities-with-Hibernate-Envers/
@@ -22,14 +23,21 @@ import javax.persistence.*;
  * -------------------------------
  * rev |   revtstmp |  username
  * -----+-----------+-------------
+ *
+ * And also show the REVCHANGES table
  */
 @Entity
-@RevisionEntity(CustomerAuditRevisionListener.class)
 @Table(name = "REVINFO")
-public class AuditRevisionEntity extends DefaultRevisionEntity {
+@RevisionEntity(CustomerAuditRevisionListener.class)
+public class CustomTrackingRevisionEntity extends DefaultRevisionEntity {
+
+    @ElementCollection
+    @JoinTable(name = "REVCHANGES", joinColumns = @JoinColumn( name = "REV" ))
+    @Column( name = "ENTITYNAME" )
+    @ModifiedEntityNames
+    private Set<String> modifiedEntityNames = new HashSet<>();
 
     private String username;
-
 
     public String getUsername() {
         return username;
@@ -37,5 +45,9 @@ public class AuditRevisionEntity extends DefaultRevisionEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Set<String> getModifiedEntityNames() {
+        return modifiedEntityNames;
     }
 }
